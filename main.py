@@ -1,28 +1,19 @@
 import argparse
-from nst import NeuralStyleTransfer
-from utils import imshow
-import tensorflow as tf
+from neuraltransfer import NeuralStyleTransfer
 
-# Configure TensorFlow to use GPU memory growth
-gpus = tf.config.experimental.list_physical_devices('GPU')
-if gpus:
-    try:
-        for gpu in gpus:
-            tf.config.experimental.set_memory_growth(gpu, True)
-    except RuntimeError as e:
-        print(e)
-
-def main(args):
-    nst = NeuralStyleTransfer(args.content_image, args.style_image)
-    best_img, best_loss = nst.run_style_transfer(num_iterations=args.iterations)
-    imshow(best_img, 'Output Image')
-    best_img.save(args.output_image)
-
-if __name__ == "__main__":
+def parse_args():
     parser = argparse.ArgumentParser(description='Neural Style Transfer')
-    parser.add_argument('--content_image', type=str, help='Path to content image')
-    parser.add_argument('--style_image', type=str, help='Path to style image')
-    parser.add_argument('--output_image', type=str, help='Path to save the output image')
-    parser.add_argument('--iterations', type=int, default= 200, help='Number of iterations for style transfer')
-    args = parser.parse_args()
-    main(args)
+    parser.add_argument('--content', type=str, required=True, help='Path to the content image')
+    parser.add_argument('--style', type=str, required=True, help='Path to the style image')
+    parser.add_argument('--output', type=str, required=True, help='Path to save the output image')
+    parser.add_argument('--iteration', type= int, required=True, help='Number of iterations')
+    parser.add_argument('--img_size', type= int, required=True, help='Image size')
+    return parser.parse_args()
+
+def main():
+    args = parse_args()
+    nst = NeuralStyleTransfer(args.content, args.style, args.output, iteration= args.iteration , img_size= args.img_size)
+    nst.generate()
+
+if __name__ == '__main__':
+    main()
