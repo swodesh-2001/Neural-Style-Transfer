@@ -31,7 +31,7 @@ Neural Style Transfer (NST) is a technique that takes two images—a content ima
 - Artistic image generation
 - Photo and video editing
 - Creating visually appealing content for social media and marketing
-
+ 
 ## 2. Theory
 
 ### Content and Style Representations
