@@ -50,10 +50,8 @@ class NeuralStyleTransfer:
 
 
             print(f"Iteration {i} ")
- 
-                
-            
             final_image = clipped_image
+            
         image = tensor_to_image(final_image)
         plt.imshow(image)
         image.save(self.output_path)

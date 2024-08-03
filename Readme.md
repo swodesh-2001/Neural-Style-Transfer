@@ -1,5 +1,4 @@
 # Neural Style Transfer
-
 ## Table of Contents
 1. [Introduction](#introduction)
     - [What is Neural Style Transfer?](#what-is-neural-style-transfer)
@@ -11,10 +10,10 @@
         - [Style Loss](#style-loss)
         - [Total Loss](#total-loss)
 3. [Project Structure](#project-structure)
-    - [`utils.py`](#utilspy)
-    - [`model.py`](#modelpy)
-    - [`nst.py`](#nstpy)
-    - [`main.py`](#mainpy)
+    - [`utils.py`](#loading-and-processing-images-utilspy)
+    - [`model.py`](#building-the-vgg-model-modelpy)
+    - [`neuraltransfer.py`](#running-the-style-transfer-neuraltransferpy)
+    - [`main.py`](#5-running-the-script)
 4. [Detailed Code Explanation](#detailed-code-explanation)
     - [Loading and Processing Images](#loading-and-processing-images)
     - [Building the VGG Model](#building-the-vgg-model)
@@ -28,8 +27,7 @@
 ### What is Neural Style Transfer?
 Neural Style Transfer (NST) is a technique that takes two images—a content image and a style image—and blends them together so that the output image looks like the content image but "painted" in the style of the style image. It uses convolutional neural networks (CNNs) to achieve this effect.
 
-### Applications of Neural Style Transfer
-NST has been used in various applications including:
+### Applications of Neural Style Transfer 
 - Artistic image generation
 - Photo and video editing
 - Creating visually appealing content for social media and marketing
@@ -74,7 +72,7 @@ The project is divided into four main modules:
 
 - `utils.py`: Helper functions for image loading and processing.
 - `model.py`: Defines the VGG model and its layers for style and content extraction.
-- `nst.py`: Implements the Neural Style Transfer logic.
+- `neuraltransfer.py`: Implements the Neural Style Transfer logic.
 - `main.py`: The entry point for the script, handling argument parsing and running the transfer.
 
 ## 4. Detailed Code Explanation
@@ -163,7 +161,7 @@ def get_style_loss(base_style, gram_target):
 
 The `get_content_loss` function computes the MSE between the content representations. The `gram_matrix` function computes the Gram matrix, and the `get_style_loss` function computes the MSE between the Gram matrices of the style representations.
 
-### Running the Style Transfer (`nst.py`)
+### Running the Style Transfer (`neuraltransfer.py`)
 This module contains the main logic for running the style transfer.
 
 #### Initialization
@@ -264,7 +262,7 @@ The `main.py` script is the entry point for running the Neural Style Transfer.
 
 ```python
 import argparse
-from nst import NeuralStyleTransfer
+from neuraltransfer import NeuralStyleTransfer
 from utils import imshow
 
 def main(args):
@@ -285,8 +283,20 @@ if __name__ == "__main__":
 
 This script uses `argparse` to handle command-line arguments for specifying the paths to the content and style images, the output image path, and the number of iterations for the style transfer. It then creates an instance of `NeuralStyleTransfer`, runs the style transfer, and saves the generated image.
 
-## 6. References
-- Gatys, L.A., Ecker, A.S., & Bethge, M. (2016). Image Style Transfer Using Convolutional Neural Networks. In Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR).
-- TensorFlow Tutorials: Neural Style Transfer. (https://www.tensorflow.org/tutorials/generative/style_transfer)
 
+## Sample Bash Command
+
+```python
+python main.py --content /images/content.jpg --style /images/style.jpg --output /images/output.jpg --iteration 200 --img_size 100
+```
  
+
+## Result
+
+Just for 200 iterations 
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="./images/content.jpg" alt="Image 1" style="width: 30%; height: auto;"/>
+    <img src="./images/style.jpg" alt="Image 2" style="width: 30%; height: auto;"/>
+    <img src="./images/output.jpg" alt="Image 3" style="width: 30%; height: auto;"/>
+</div>
