@@ -43,29 +43,29 @@ The core idea of NST is to define and minimize a loss function that blends the c
 #### Content Loss
 The content loss measures how different the content of the generated image is from the content image. It is typically calculated as the mean squared error (MSE) between the feature representations of the content image and the generated image at a certain layer.
 
-$$
+```math
 \mathcal{L}_{\text{content}}(C, G) = \sum_{i,j} ( F_{ij}^{C} - F_{ij}^{G} )^2
-$$
+```
 
-where \( F_{ij}^{C} \) and \( F_{ij}^{G} \) are the feature representations of the content image and generated image, respectively.
+where $F_{ij}^{C}$ and $F_{ij}^{G}$ are the feature representations of the content image and generated image, respectively.
 
 #### Style Loss
 The style loss measures how different the style of the generated image is from the style image. It is calculated using the Gram matrix of the feature representations. The Gram matrix captures the correlations between the different feature maps.
 
-$$
+```math
 \mathcal{L}_{\text{style}}(S, G) = \sum_{l} w_{l} \sum_{i,j} ( G_{ij}^{S} - G_{ij}^{G} )^2
-$$
+```
 
-where \( G_{ij}^{S} \) and \( G_{ij}^{G} \) are the Gram matrices of the style image and generated image, and \( w_{l} \) are the weights for each layer.
+where $G_{ij}^{S}$ and $G_{ij}^{G}$ are the Gram matrices of the style image and generated image, and $w_{l}$ are the weights for each layer.
 
 #### Total Loss
 The total loss is a weighted sum of the content loss and the style loss.
 
-$$
+```math
 \mathcal{L}_{\text{total}} = \alpha \mathcal{L}_{\text{content}} + \beta \mathcal{L}_{\text{style}}
-$$
+```
 
-where \( \alpha \) and \( \beta \) are the weights for the content and style loss, respectively.
+where $\alpha$ and $\beta$ are the weights for the content and style loss, respectively.
 
 ## 3. Project Structure
 The project is divided into three main modules:
